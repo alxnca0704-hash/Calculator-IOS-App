@@ -1,50 +1,192 @@
-# Welcome to your Expo app 👋
+# iOS Calculator Clone 🧮
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A pixel-perfect recreation of the iOS Calculator app built with React Native and Expo. This project demonstrates advanced mobile UI development, state management, and mathematical operations handling in a production-quality application.
 
-## Get started
+## 📱 Features
 
-1. Install dependencies
+### Core Functionality
+- ✅ **Basic Arithmetic Operations**: Addition, subtraction, multiplication, and division
+- ✅ **Decimal Support**: Handle decimal numbers with precision
+- ✅ **Percentage Calculations**: Convert numbers to percentages instantly
+- ✅ **Sign Toggle**: Switch between positive and negative numbers
+- ✅ **Chain Calculations**: Perform multiple operations in sequence
+- ✅ **Smart Clear Button**: Intelligent AC/C toggle based on calculator state
 
-   ```bash
-   npm install
-   ```
+### UI/UX Features
+- 🎨 **Authentic iOS Design**: Faithful reproduction of Apple's calculator interface
+- 🔘 **Circular Buttons**: Perfectly rounded buttons with proper touch feedback
+- 🟠 **Color-Coded Buttons**: Orange operators, gray functions, dark number pad
+- ✨ **Active Operator Highlighting**: Visual feedback for selected operations
+- 📏 **Responsive Display**: Auto-sizing text that adapts to number length
+- 🌙 **Dark Theme**: Sleek dark interface matching iOS design language
 
-2. Start the app
+## 🚀 Getting Started
 
-   ```bash
-   npx expo start
-   ```
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
+- Expo CLI (optional)
+- iOS Simulator (Mac only) or Android Emulator
 
-In the output, you'll find options to open the app in a
+### Installation
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+1. Clone the repository
 ```bash
-npm run reset-project
+git clone <your-repo-url>
+cd calculator-app
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Install dependencies
+```bash
+npm install
+```
 
-## Learn more
+3. Start the development server
+```bash
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+4. Run the app
+- **iOS Simulator**: Press `i` in the terminal
+- **Android Emulator**: Press `a` in the terminal
+- **Physical Device**: Scan the QR code with Expo Go app
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🛠️ Tech Stack
 
-## Join the community
+| Technology | Purpose |
+|------------|---------|
+| **React Native** | Cross-platform mobile framework |
+| **Expo** | Development and build toolchain |
+| **TypeScript** | Type-safe JavaScript development |
+| **React Hooks** | Modern state management (useState) |
 
-Join our community of developers creating universal apps.
+## 📂 Project Structure
+```
+calculator-app/
+├── app/
+│   ├── index.tsx              # Main calculator component
+│   └── _layout.tsx            # App layout configuration
+├── assets/
+│   ├── fonts/                 # Custom fonts
+│   └── images/                # App icons and images
+├── node_modules/              # Dependencies
+├── .gitignore                 # Git ignore rules
+├── app.json                   # Expo configuration
+├── package.json               # Project dependencies
+├── tsconfig.json              # TypeScript configuration
+└── README.md                  # Project documentation
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🧮 How It Works
+
+### State Management
+The calculator maintains four key pieces of state:
+```typescript
+const [display, setDisplay] = useState('0');              // Current display value
+const [previousValue, setPreviousValue] = useState(null);  // Stored value for operations
+const [operation, setOperation] = useState(null);          // Active operation (+, -, ×, ÷)
+const [shouldResetDisplay, setShouldResetDisplay] = useState(false); // Reset flag
+```
+
+### Operation Flow
+1. **Number Entry**: Numbers are appended to the display
+2. **Operation Selection**: Current value is stored, operation is set
+3. **Chain Calculations**: When selecting a new operation, previous operation executes first
+4. **Equals**: Final calculation is performed and result displayed
+5. **Clear**: AC clears everything, C clears only display
+
+### Button Logic
+- **Number Buttons (0-9)**: Append digits to display
+- **Decimal (.)**: Add decimal point if not already present
+- **Operators (+, -, ×, ÷)**: Store current value and set operation
+- **Equals (=)**: Calculate and display result
+- **Clear (AC/C)**: Reset calculator state
+- **Plus/Minus (+/-)**: Toggle number sign
+- **Percent (%)**: Divide current value by 100
+
+## 🎨 Design Specifications
+
+### Button Dimensions
+- **Standard Buttons**: 80×80 pixels, circular
+- **Zero Button**: 170×80 pixels, pill-shaped
+- **Spacing**: 10px margin between buttons
+
+### Color Palette
+- **Background**: `#000000` (Pure Black)
+- **Number Buttons**: `#505050` (Dark Gray)
+- **Function Buttons**: `#CCCCCC` (Light Gray)
+- **Operator Buttons**: `#FF9500` (Orange)
+- **Active Operator**: `#FFFFFF` (White background, orange text)
+- **Text**: `#FFFFFF` (White)
+
+### Typography
+- **Display**: 70px, font-weight 200
+- **Button Text**: 35px
+- **Function Text**: 29px, black color
+
+## 🔧 Key Functions
+
+### `handleNumber(num: string)`
+Handles number button presses, managing display reset and digit appending.
+
+### `handleOperation(op: string)`
+Processes operator selection, executing pending operations and storing values.
+
+### `handleEquals()`
+Calculates final result from stored values and operation.
+
+### `calculate(prev: number, current: number, op: string)`
+Core calculation function that performs arithmetic operations.
+
+### `handleClear()`
+Smart clear function that toggles between AC (All Clear) and C (Clear).
+
+## 🚧 Future Enhancements
+- [ ] Add memory functions (M+, M-, MR, MC)
+- [ ] Implement scientific calculator mode
+- [ ] Add calculation history
+- [ ] Support for keyboard input
+- [ ] Haptic feedback on button presses
+- [ ] Landscape orientation with advanced functions
+- [ ] Theme customization options
+- [ ] Sound effects
+
+## 📱 Screenshots
+
+<div align="center">
+  <img src="assets/screenshots/IMG_8429.PNG" alt="Calculator Interface" width="250"/>
+  <img src="assets/screenshots/IMG_8430.PNG" alt="Calculator Operation" width="250"/>
+  <img src="assets/screenshots/IMG_8431.PNG" alt="Calculator Result" width="250"/>
+</div>
+
+## 🤝 Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👨‍💻 Author
+Alex
+- GitHub: [@alxnca0704-hash](https://github.com/alxnca0704-hash)
+- Email: alxnca0704@gmail.commail: alxnca0704@gmail.com
+
+## 🙏 Acknowledgments
+- Inspired by Apple's iOS Calculator
+- Built with [Expo](https://expo.dev)
+- Thanks to the React Native community
+
+## 📚 Learn More
+- [Expo Documentation](https://docs.expo.dev/)
+- [React Native Documentation](https://reactnative.dev/)
+- [TypeScript Documentation](https://www.typescriptlang.org/)
+- [React Hooks Guide](https://react.dev/reference/react)
+
+---
+
+Made with ❤️ using React Native and Expo
