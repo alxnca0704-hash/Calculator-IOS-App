@@ -17,6 +17,31 @@ export default function Index() {
     }
   };
 
+  const handleOperation = (op: string) => {
+    const currentValue = parseFloat(display);
+    
+    if (previousValue === null) {
+      setPreviousValue(currentValue);
+    } else if (operation) {
+      const result = calculate(previousValue, currentValue, operation);
+      setDisplay(result.toString());
+      setPreviousValue(result);
+    }
+    
+    setOperation(op);
+    setShouldResetDisplay(true);
+  };
+
+  const handleEquals = () => {
+    if (operation && previousValue !== null) {
+      const currentValue = parseFloat(display);
+      const result = calculate(previousValue, currentValue, operation);
+      setDisplay(result.toString());
+      setPreviousValue(null);
+      setOperation(null);
+      setShouldResetDisplay(true);
+    }
+  };
   const handleDecimal = () => {
     if (shouldResetDisplay) {
       setDisplay('0.');
@@ -45,31 +70,7 @@ export default function Index() {
     setDisplay((parseFloat(display) / 100).toString());
   };
 
-  const handleOperation = (op: string) => {
-    const currentValue = parseFloat(display);
-    
-    if (previousValue === null) {
-      setPreviousValue(currentValue);
-    } else if (operation) {
-      const result = calculate(previousValue, currentValue, operation);
-      setDisplay(result.toString());
-      setPreviousValue(result);
-    }
-    
-    setOperation(op);
-    setShouldResetDisplay(true);
-  };
 
-  const handleEquals = () => {
-    if (operation && previousValue !== null) {
-      const currentValue = parseFloat(display);
-      const result = calculate(previousValue, currentValue, operation);
-      setDisplay(result.toString());
-      setPreviousValue(null);
-      setOperation(null);
-      setShouldResetDisplay(true);
-    }
-  };
 
   const calculate = (prev: number, current: number, op: string): number => {
     switch (op) {
